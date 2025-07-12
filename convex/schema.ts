@@ -36,6 +36,11 @@ const applicationTables = {
     campaignId: v.id("campaigns"),
     productImageId: v.id("_storage"),
     isPrimary: v.boolean(), // Each image has its own document and URL
+    filename: v.optional(v.string()),
+    contentType: v.optional(v.string()),
+    size: v.optional(v.number()),
+    imageState: v.optional(v.any()), // Store Pintura editor state
+    updatedAt: v.optional(v.string()),
   }).index("by_campaign", ["campaignId"])
     .index("by_campaign_and_primary",["campaignId","isPrimary"])
   
