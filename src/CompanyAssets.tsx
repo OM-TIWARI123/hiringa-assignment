@@ -72,7 +72,7 @@ export function CompanyAssets() {
       }
 
       // Upload assets if provided
-      let assetsFileIds: Id<"_storage">[] = [];
+      const assetsFileIds: Id<"_storage">[] = [];
       for (const file of assets) {
         const uploadUrl = await generateUploadUrl();
         const result = await fetch(uploadUrl, {
@@ -280,7 +280,7 @@ export function CompanyAssets() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={()=>handleSubmit} className="space-y-8">
           {renderCurrentSection()}
 
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">

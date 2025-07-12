@@ -170,8 +170,8 @@ function SelectedCampaignTabs({
         </button>
         <button
           onClick={() => setTab('AiImage')}
-          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'editPhoto' ? 'underline' : ''}`}
-          disabled={tab === 'editPhoto'}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'AiImage' ? 'underline' : ''}`}
+          disabled={tab === 'AiImage'}
         >
           {/* Photo icon for Edit Photo */}
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

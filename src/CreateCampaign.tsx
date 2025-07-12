@@ -106,12 +106,14 @@ export function CreateCampaign({
         productDescription: productDescription || undefined,
         layoutImageId,
       });
-      await createProduct({
-        campaignId,
-        productImageId,
-        isPrimary:true,
-
-      })
+      
+      if (productImageId) {
+        await createProduct({
+          campaignId,
+          productImageId,
+          isPrimary: true,
+        });
+      }
 
       toast.success("Campaign created successfully!");
       onCampaignCreated(campaignId);
@@ -343,7 +345,7 @@ export function CreateCampaign({
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={(e) => { void handleSubmit(e); }} className="space-y-8">
           {renderCurrentSection()}
 
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
