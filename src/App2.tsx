@@ -25,7 +25,7 @@ import {
   BreadcrumbSeparator,
 } from "./components/ui/breadcrumb";
 import {EditPhoto} from "./EditPhoto";
-import { CampaignList } from "./CampaignList";
+import { AiImage } from "./components/ai/AiImage";
 
 export default function App2() {
   const [selectedCampaignId, setSelectedCampaignId] = useState<string | null>(null);
@@ -141,7 +141,7 @@ function SelectedCampaignTabs({
   campaignId: string;
   onBack: () => void;
 }) {
-  const [tab, setTab] = useState<'review' | 'editPhoto'>('review');
+  const [tab, setTab] = useState<'review' | 'editPhoto'|'AiImage'>('review');
   return (
     <div>
       <div className="flex gap-4 mb-6">
@@ -168,9 +168,23 @@ function SelectedCampaignTabs({
           </svg>
           Edit Photo
         </button>
+        <button
+          onClick={() => setTab('AiImage')}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'editPhoto' ? 'underline' : ''}`}
+          disabled={tab === 'editPhoto'}
+        >
+          {/* Photo icon for Edit Photo */}
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7V6a2 2 0 012-2h12a2 2 0 012 2v1M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M4 7l4.586 4.586a2 2 0 002.828 0L16 7" />
+          </svg>
+           Ai Image
+        </button>
+        
       </div>
       {tab === 'review' && <ReviewPosts campaignId={campaignId} onBack={onBack} />}
       {tab === 'editPhoto' && <EditPhoto campaignId={campaignId} />}
+      {tab === 'AiImage' && <AiImage campaignId={campaignId}/>}
     </div>
   );
 }

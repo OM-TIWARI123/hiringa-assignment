@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@convex-dev/auth": "^0.0.80",
+    "@google/genai": "^1.9.0",
     "@pqina/filepond-plugin-image-editor": "^9.2.4",
     "@pqina/pintura": "^8.92.17",
     "@pqina/react-pintura": "^9.0.4",
