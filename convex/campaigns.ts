@@ -114,11 +114,11 @@ export const updateEditPrompt = mutation({
 
     if (!posts) throw new Error("Posts not found");
 
-    const updatedPosts = [...posts.posts];
-    updatedPosts[args.postIndex] = {
-      ...updatedPosts[args.postIndex],
-      editPrompt: args.editPrompt,
-    };
+    const updatedPosts = posts.posts.map((post, index) => 
+      index === args.postIndex 
+        ? { ...post, editPrompt: args.editPrompt }
+        : post
+    );
 
     await ctx.db.patch(posts._id, {
       posts: updatedPosts,
