@@ -26,6 +26,7 @@ import {
 } from "./components/ui/breadcrumb";
 import {EditPhoto} from "./EditPhoto";
 import { AiImage } from "./components/ai/AiImage";
+import { ImageGeneration } from "./components/ImageGeneration/ImageGeneration";
 
 export default function App2() {
   const [selectedCampaignId, setSelectedCampaignId] = useState<string | null>(null);
@@ -41,8 +42,8 @@ export default function App2() {
           <SidebarInset className="flex-1 w-0">
             <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
               <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="h-4" />
-              <Breadcrumb>
+              <Separator orientation="vertical" className="h-4 hidden sm:block" />
+              <Breadcrumb className="hidden sm:block">
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbPage>
@@ -57,9 +58,18 @@ export default function App2() {
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
+              <div className="sm:hidden text-sm font-medium">
+                {currentTab === "home"
+                  ? "Home"
+                  : currentTab === "company"
+                    ? "Company Assets"
+                    : currentTab === "history"
+                      ? "Campaign History"
+                      : "Edit Photo"}
+              </div>
             </header>
-            <main className="flex-1 p-4">
-              <div className="flex flex-col gap-8">
+            <main className="flex-1 p-2 sm:p-4">
+              <div className="flex flex-col gap-4 sm:gap-8">
                 <Content
                   currentTab={currentTab}
                   selectedCampaignId={selectedCampaignId}
@@ -141,50 +151,61 @@ function SelectedCampaignTabs({
   campaignId: string;
   onBack: () => void;
 }) {
-  const [tab, setTab] = useState<'review' | 'editPhoto'|'AiImage'>('review');
+  const [tab, setTab] = useState<'review' | 'editPhoto'|'AiImage'|'imageGeneration'>('review');
   return (
     <div>
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
         <button
           onClick={() => setTab('review')}
-          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'review' ? 'underline' : ''}`}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 sm:gap-2 transition-colors px-2 py-1 rounded ${tab === 'review' ? 'bg-indigo-50 underline' : ''}`}
           disabled={tab === 'review'}
         >
           {/* Left arrow icon for Review Posts */}
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Review Posts
+          <span className="text-xs sm:text-sm">Review Posts</span>
         </button>
         <button
           onClick={() => setTab('editPhoto')}
-          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'editPhoto' ? 'underline' : ''}`}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 sm:gap-2 transition-colors px-2 py-1 rounded ${tab === 'editPhoto' ? 'bg-indigo-50 underline' : ''}`}
           disabled={tab === 'editPhoto'}
         >
           {/* Photo icon for Edit Photo */}
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="3" />
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7V6a2 2 0 012-2h12a2 2 0 012 2v1M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M4 7l4.586 4.586a2 2 0 002.828 0L16 7" />
           </svg>
-          Edit Photo
+          <span className="text-xs sm:text-sm">Edit Photo</span>
         </button>
         <button
           onClick={() => setTab('AiImage')}
-          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2 transition-colors ${tab === 'AiImage' ? 'underline' : ''}`}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 sm:gap-2 transition-colors px-2 py-1 rounded ${tab === 'AiImage' ? 'bg-indigo-50 underline' : ''}`}
           disabled={tab === 'AiImage'}
         >
-          {/* Photo icon for Edit Photo */}
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7V6a2 2 0 012-2h12a2 2 0 012 2v1M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M4 7l4.586 4.586a2 2 0 002.828 0L16 7" />
+          {/* AI icon for AI Image */}
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-           Ai Image
+          <span className="text-xs sm:text-sm">AI Image</span>
+        </button>
+        <button
+          onClick={() => setTab('imageGeneration')}
+          className={`text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 sm:gap-2 transition-colors px-2 py-1 rounded ${tab === 'imageGeneration' ? 'bg-indigo-50 underline' : ''}`}
+          disabled={tab === 'imageGeneration'}
+        >
+          {/* Image generation icon */}
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span className="text-xs sm:text-sm">Generate</span>
         </button>
         
       </div>
       {tab === 'review' && <ReviewPosts campaignId={campaignId} onBack={onBack} />}
       {tab === 'editPhoto' && <EditPhoto campaignId={campaignId} />}
       {tab === 'AiImage' && <AiImage campaignId={campaignId}/>}
+      {tab === 'imageGeneration' && <ImageGeneration campaignId={campaignId} />}
     </div>
   );
 }

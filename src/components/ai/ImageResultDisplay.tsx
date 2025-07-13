@@ -36,22 +36,25 @@ export function ImageResultDisplay({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Generated Image</h2>
-        <div className="space-x-2">
-          <Button variant="outline" size="sm" onClick={handleDownload}>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <h2 className="text-lg sm:text-xl font-semibold">Generated Image</h2>
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <Button variant="outline" size="sm" onClick={handleDownload} className="flex-1 sm:flex-none">
             <Download className="w-4 h-4 mr-2" />
-            Download
+            <span className="hidden sm:inline">Download</span>
+            <span className="sm:hidden">Save</span>
           </Button>
           {conversationHistory.length > 0 && (
-            <Button variant="outline" size="sm" onClick={toggleHistory}>
+            <Button variant="outline" size="sm" onClick={toggleHistory} className="flex-1 sm:flex-none">
               <MessageCircle className="w-4 h-4 mr-2" />
-              {showHistory ? "Hide History" : "Show History"}
+              <span className="hidden sm:inline">{showHistory ? "Hide History" : "Show History"}</span>
+              <span className="sm:hidden">{showHistory ? "Hide" : "History"}</span>
             </Button>
           )}
-          <Button variant="outline" size="sm" onClick={onReset}>
+          <Button variant="outline" size="sm" onClick={onReset} className="flex-1 sm:flex-none">
             <RotateCcw className="w-4 h-4 mr-2" />
-            Create New Image
+            <span className="hidden sm:inline">Create New Image</span>
+            <span className="sm:hidden">New</span>
           </Button>
         </div>
       </div>

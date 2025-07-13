@@ -336,16 +336,16 @@ export function CreateCampaign({
   };
 
   return (
-    <div className="w-full p-6">
-      <div className="bg-white rounded-xl shadow-sm p-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Create New Marketing Campaign</h1>
+    <div className="w-full p-2 sm:p-6">
+      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-2">
+          <h1 className="text-2xl sm:text-3xl font-bold">Create New Marketing Campaign</h1>
           <div className="text-sm text-gray-500">
             Step {currentIndex + 1} of {sections.length}
           </div>
         </div>
 
-        <form onSubmit={(e) => { void handleSubmit(e); }} className="space-y-8">
+        <form onSubmit={(e) => { void handleSubmit(e); }} className="space-y-6 sm:space-y-8">
           {renderCurrentSection()}
 
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -355,11 +355,11 @@ export function CreateCampaign({
             />
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col sm:flex-row justify-between gap-3">
             <button
               type="button"
               onClick={handleBack}
-              className={`px-6 py-2 text-indigo-600 font-medium rounded-lg
+              className={`px-4 sm:px-6 py-2 text-indigo-600 font-medium rounded-lg
                 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                 ${currentIndex === 0 ? 'invisible' : ''}`}
             >
@@ -368,7 +368,7 @@ export function CreateCampaign({
             <button
               type="submit"
               disabled={isSubmitting || !canProceed()}
-              className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg
+              className="px-4 sm:px-6 py-3 sm:py-2 bg-indigo-600 text-white font-medium rounded-lg
                 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                 disabled:opacity-50 disabled:cursor-not-allowed
                 transition-colors duration-200"

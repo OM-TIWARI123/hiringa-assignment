@@ -100,18 +100,19 @@ export function AiImage({campaignId}:AiImageProps){
     const createProductImage = useMutation(api.productImage.saveProductImage);
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-background p-8">
-        <Card className="w-full max-w-4xl border-0 bg-card shadow-none">
-          <CardHeader className="flex flex-col items-center justify-center space-y-2">
-            <CardTitle className="flex items-center gap-2 text-foreground">
-              <Wand2 className="w-8 h-8 text-primary" />
-              Image Creation & Editing
-            </CardTitle>
-            <span className="text-sm font-mono text-muted-foreground">
-              powered by Google DeepMind Gemini 2.0 Flash
-            </span>
-          </CardHeader>
-          <CardContent className="space-y-6 pt-6 w-full">
+        <main className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+          <div className="max-w-4xl mx-auto">
+            <Card className="w-full border-0 bg-card shadow-none">
+              <CardHeader className="flex flex-col items-center justify-center space-y-2 px-4 sm:px-6">
+                <CardTitle className="flex items-center gap-2 text-foreground text-xl sm:text-2xl">
+                  <Wand2 className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+                  <span className="text-center">Image Creation & Editing</span>
+                </CardTitle>
+                <span className="text-xs sm:text-sm font-mono text-muted-foreground text-center">
+                  powered by Google DeepMind Gemini 2.0 Flash
+                </span>
+              </CardHeader>
+              <CardContent className="space-y-4 sm:space-y-6 pt-4 sm:pt-6 w-full px-4 sm:px-6">
             {error && (
               <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
                 {error}
@@ -159,8 +160,9 @@ export function AiImage({campaignId}:AiImageProps){
                 />
               </>
             )}
-          </CardContent>
-        </Card>
-      </main>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
     )
 }
