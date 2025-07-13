@@ -1,109 +1,229 @@
-# CalQuity Internship Task: Social Media Post Generation Agent
+# CalQuity Social Media Post Generation Agent
 
 ## Overview
-You are provided with a sample social media post generation full-stack application with a dummy post generation implementation. Complete this implementation, and enhance the platform by implementing **3 out of 5 specified features** listed below.
 
-## Initial Setup
-  
-This is a project built using [Convex](https://convex.dev) as its backend. Obtain the required keys from [Convex](https://convex.dev).
-
-**Sample .env file**
-```
-CONVEX_DEPLOY_KEY=<>
-
-CONVEX_DEPLOYMENT=<>
-
-VITE_CONVEX_URL=<>
-```
-  
-## Project structure
-  
-The frontend code is in the `app` directory and is built with [Vite](https://vitejs.dev/).
-  
-The backend code is in the `convex` directory.
-  
-`npm run dev` will start the frontend and backend servers.
-
-## App authentication
-
-This project uses [Convex Auth](https://auth.convex.dev/) with Anonymous auth for easy sign in. You may wish to change this before deploying your app.
-
-## Developing and deploying your app
-
-Check out the [Convex docs](https://docs.convex.dev/) for more information on how to develop with Convex.
-
-## HTTP API
-
-User-defined http routes are defined in the `convex/router.ts` file. We split these routes into a separate file from `convex/http.ts` to allow us to prevent the LLM from modifying the authentication routes.
-
-## Instructions
-- **Code Reuse**: Maximize the utilization of existing codebase and architecture
-- **Product Enhancement**: If you identify opportunities to improve the user experience or product flow, feel free to restructure or refactor the existing implementation
-- **Technical Implementation**: Use Google's Gemini API for image generation capabilities
-- **Quality Focus**: Prioritize feature completeness and user experience over quantity
-
-## Feature Requirements
-
-### 1. Layout Presets & Template System
-Implement a comprehensive layout management system that includes:
-- A layout selector interface with predefined template options
-- Template upload functionality allowing users to upload custom hand-drawn/other layouts
-- Inform the image generation process to follow the uploaded template
-
-### 2. Advanced Image Editing Features
-Develop image editing capabilities including:
-- In-painting functionality for selective image modifications
-- Prompt-based editing system for AI-assisted image adjustments
-- Traditional image editing features
-
-### 3. Automatic Context Retrieval
-Build an intelligent context extraction system featuring:
-- Website or Instagram Page scraping functionality to gather brand assets and context
-- Typography and color palette extraction from scraped content
-- Automatic application of extracted context to post generation 
-
-### 4. Parallel Image Generation
-Create a multi-variant generation system with:
-- Simultaneous generation of 5 different post variants
-- Comparative view interface for variant selection
-- Ability to export one or more generated posts once the user is satisfied
-
-### 5. Mobile-Responsive Design
-- Responsive design across all device sizes
-- Mobile-specific user experience improvements
-
-## Technical Specifications
-- **Image Generation**: Use Google's Gemini API for all AI image generation tasks
-- **Frontend**: Maintain compatibility with existing technology stack
-- **Backend**: Ensure scalable architecture for new feature integration
-
-Ideal preference would be implementing 2 of the first 3 features mentioned above, and 1 of the remaining 2. We will focus on quality over quantity. If you have any interesting idea other than the 5 features mentioned above that will be useful for a marketing agent, feel free to implement that as 1 of the 5 features, and mention it in the README file.
-
-## Submission Requirements
-
-Your submission must include the following three components:
-
-### 1. Live Demo
-- **Hosted Website**: Deploy your website to a publicly accessible URL
-- **Functionality**: Ensure all implemented features are fully operational, with appropriate error handling.
-
-### 2. Source Code Repository
-- **GitHub Repository**: Create a private repository containing all source code, and add pratham31012002 and samarth6341 to the repo.
-- **Documentation**: Include a comprehensive README with setup instructions, architectural decisions, design choices, alternatives, etc.
-- **Code Quality**: Maintain clean, well-commented, and organized code structure
-
-### 3. Feature Demonstration Video
-- **Screen Recording**: Record a comprehensive walkthrough of the implemented features
-- **Duration**: 3-5 minutes demonstrating key functionalities
-- **Quality**: Ensure clear audio narration and high-quality video recording
-- **Content**: Cover feature usage, user interface, and technical implementation highlights and/or design choices.
-
-## Evaluation Criteria
-- **Feature Implementation Quality**: Completeness and robustness of implemented features
-- **User Experience**: Intuitive interface design and smooth user interactions
-- **Technical Excellence**: Code quality, architecture decisions, and performance optimization
-- **Innovation**: Creative enhancements and additional value-added features
+This is a full-stack application for AI-powered social media post generation and editing, built with React, Convex, and Google Gemini API. The platform enables users to generate, edit, and manage marketing posts and images with advanced AI features and a focus on user experience.
 
 ---
 
-**Note**: This assignment tests your ability to understand codebases and unknown tech stacks, enhance existing projects, implement complex features, and deliver production-ready solutions. Focus on creating a polished, user-friendly experience that demonstrates your technical capabilities and product thinking.
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Design Choices](#design-choices)
+- [Setup Instructions](#setup-instructions)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Development & Deployment](#development--deployment)
+- [Testing](#testing)
+- [Troubleshooting](#troubleshooting)
+- [Alternatives Considered](#alternatives-considered)
+- [Contribution Guidelines](#contribution-guidelines)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## Features
+
+- **AI Image Generation:** Uses Google Gemini API for generating marketing images.
+- **Advanced Image Editing:** In-painting, prompt-based, and traditional editing via Pintura.
+- **Layout Presets & Templates:** Select or upload custom layouts to guide image generation.
+- **Automatic Context Retrieval:** Scrape brand assets and context from websites or Instagram.
+- **Parallel Image Generation:** Generate and compare multiple variants simultaneously.
+- **Mobile-Responsive Design:** Optimized for all device sizes.
+- **Authentication:** Anonymous auth via Convex (can be replaced for production).
+- **Export & Download:** Export selected posts and images.
+
+---
+
+## Architecture
+
+- **Frontend:**  
+  - Built with React 19, Vite, and Tailwind CSS for fast, modern UI.
+  - Modular component structure for maintainability.
+  - State management via React hooks and Convex React client.
+
+- **Backend:**  
+  - Powered by Convex for real-time data, authentication, and serverless functions.
+  - Google Gemini API integration for AI image generation.
+  - Scalable schema for companies, campaigns, posts, and assets.
+
+- **Image Editing:**  
+  - Uses Pintura and FilePond for advanced, user-friendly image editing.
+
+- **Deployment:**  
+  - Designed for deployment on Netlify (frontend) and Convex Cloud (backend).
+
+---
+
+## Design Choices
+
+- **Convex as Backend:**  
+  Chosen for its real-time capabilities, easy auth, and serverless function model.
+
+- **Google Gemini API:**  
+  Selected for state-of-the-art AI image generation and prompt-based editing.
+
+- **Component-Driven UI:**  
+  All UI is built from reusable, composable React components.
+
+- **Tailwind CSS:**  
+  Enables rapid, consistent styling and responsive design.
+
+- **FilePond & Pintura:**  
+  For robust, modern image upload and editing experiences.
+
+- **Anonymous Auth:**  
+  Used for demo and ease of onboarding; can be swapped for OAuth or email/password.
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```sh
+git clone <your-repo-url>
+cd <project-directory>
+```
+
+### 2. Install Dependencies
+
+```sh
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env.local` file in the root with the following:
+
+```
+CONVEX_DEPLOY_KEY=your_convex_deploy_key
+CONVEX_DEPLOYMENT=your_convex_deployment_url
+VITE_CONVEX_URL=your_convex_url
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+
+### 4. Start Development Server
+
+```sh
+npm run dev
+```
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Convex backend: auto-starts
+
+### 5. Build for Production
+
+```sh
+npm run build
+```
+
+### 6. Deploy
+
+- **Frontend:** Deploy `/dist` to Netlify, Vercel, or your preferred static host.
+- **Backend:** Deploy Convex functions with:
+  ```sh
+  npx convex deploy
+  ```
+
+---
+
+## Project Structure
+
+```
+/
+├── convex/              # Convex backend functions & schema
+├── src/                 # React frontend source code
+│   ├── components/      # UI and feature components
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions
+│   ├── App2.tsx         # Main app entry
+│   └── ...              # Other feature files
+├── public/              # Static assets
+├── package.json         # Project metadata and scripts
+├── tsconfig*.json       # TypeScript configs
+├── tailwind.config.js   # Tailwind CSS config
+└── README.md            # Project documentation
+```
+
+---
+
+## Environment Variables
+
+- `CONVEX_DEPLOY_KEY` – Convex deployment key
+- `CONVEX_DEPLOYMENT` – Convex deployment URL
+- `VITE_CONVEX_URL` – Convex client URL for frontend
+- `GEMINI_API_KEY` – Google Gemini API key
+
+---
+
+## Development & Deployment
+
+- **Local Dev:**  
+  Use `npm run dev` for hot-reloading frontend and backend.
+- **Linting:**  
+  `npm run lint` to check code quality.
+- **Build:**  
+  `npm run build` for production build.
+- **Deploy:**  
+  Deploy frontend to Netlify/Vercel, backend to Convex Cloud.
+
+---
+
+## Testing
+
+- **Manual Testing:**  
+  - Test all flows: campaign creation, image generation, editing, export.
+  - Test on mobile and desktop.
+- **Automated Testing:**  
+  - (Add unit/integration tests as needed; see `/tests` if present.)
+
+---
+
+## Troubleshooting
+
+- **Build Fails with "object is not extensible":**  
+  - Ensure no array mutations on frozen arrays.
+  - Make sure all dependencies are locked with `package-lock.json`.
+  - Try downgrading Vite if using v5+.
+- **Convex Auth Issues:**  
+  - Check environment variables and Convex deployment status.
+- **Google Gemini API Errors:**  
+  - Verify API key and quota.
+
+---
+
+## Alternatives Considered
+
+- **Backend:**  
+  - Considered Firebase, Supabase, and custom Express server. Chose Convex for real-time and serverless simplicity.
+- **AI API:**  
+  - Considered OpenAI DALL·E, Stable Diffusion. Chose Gemini for prompt-based editing and Google integration.
+- **Styling:**  
+  - Considered CSS Modules, Styled Components. Chose Tailwind for speed and consistency.
+
+---
+
+## Contribution Guidelines
+
+1. Fork the repo and create a feature branch.
+2. Write clear, well-commented code.
+3. Add/Update documentation for new features.
+4. Submit a pull request with a clear description.
+
+---
+
+## License
+
+[MIT](./LICENSE) (or specify your license)
+
+---
+
+## Contact
+
+For questions or support, contact the maintainers or open an issue in the repository.
+
+---
+
+**Feel free to further expand or tailor this README to your specific implementation and team preferences!**
