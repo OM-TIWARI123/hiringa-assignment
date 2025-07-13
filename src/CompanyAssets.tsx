@@ -84,7 +84,7 @@ export function CompanyAssets() {
           throw new Error("Failed to upload asset");
         }
         const { storageId } = await result.json();
-        assetsFileIds.push(storageId);
+        assetsFileIds = [...assetsFileIds, storageId];
       }
 
       await createCompany({
