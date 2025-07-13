@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
   },
   // Add this build configuration section
   build: {
+    minify:false,
     rollupOptions: {
       plugins: [
         commonjs({
