@@ -72,7 +72,7 @@ export const generateImage = action({
 
     try {
       // Convert history to the format expected by Gemini API
-      const formattedHistory =
+      const formattedHistory: FormattedHistoryItem[] =
         history && history.length > 0
           ? history
               .map((item: HistoryItem) => {
@@ -105,12 +105,10 @@ export const generateImage = action({
           : [];
 
       // Prepare the current message parts
-      const messageParts = [];
-
-      // Add the text prompt
-      messageParts.push({ text: prompt });
+      const messageParts: Array<{ text?: string; inlineData?: { data: string; mimeType: string } }> = [{ text: prompt }];
 
       // Add the image if provided
+      let finalMessageParts = messageParts;
       if (inputImage) {
         // For image editing
         console.log("Processing image edit request");
@@ -137,24 +135,24 @@ export const generateImage = action({
         );
 
         // Add the image to message parts
-        messageParts.push({
+        finalMessageParts = [...messageParts, {
           inlineData: {
             data: base64Image,
             mimeType: mimeType,
           },
-        });
+        }];
       }
       
       // Add the message parts to the history
-      formattedHistory.push({
+      const finalHistory = [...formattedHistory, {
         role: "user",
-        parts: messageParts
-      });
+        parts: finalMessageParts
+      }];
 
       // Generate the content
       const response = await ai.models.generateContent({
         model: MODEL_ID,
-        contents: formattedHistory,
+        contents: finalHistory,
         config: {
           temperature: 1,
           topP: 0.95,
