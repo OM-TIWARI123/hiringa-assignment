@@ -72,7 +72,7 @@ export function CompanyAssets() {
       }
 
       // Upload assets if provided
-      const assetsFileIds: Id<"_storage">[] = [];
+      let assetsFileIds: Id<"_storage">[] = [];
       for (const file of assets) {
         const uploadUrl = await generateUploadUrl();
         const result = await fetch(uploadUrl, {
